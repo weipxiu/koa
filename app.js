@@ -2,6 +2,18 @@ const Koa = require('koa');
 const router = require('koa-router')(); //注意：引入的方式
 const app = new Koa();//实例化
 
+// koa中间件
+app.use(async (ctx,next)=>{ //匹配任何路由,如果不写next，那么匹配成功后不会再执行，也就是说如果不执行next，那么只会打印时间，但对应的内容不会展示
+        console.log(new Date())
+        await next();
+        if(ctx.status == 404){
+            ctx.status = 404;
+            ctx.body = "这是一个错误的404页面"
+        }else{
+            console.log(ctx.url)
+        }
+})
+
 router.get('/', function (ctx, next) {
     ctx.body = "你好啊koa！";
 })
