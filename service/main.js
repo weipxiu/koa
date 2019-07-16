@@ -1,9 +1,25 @@
 const Koa = require('koa');
+const app = new Koa();//实例化
 const router = require('koa-router')(); //注意：引入的方式
 const bodyParser = require('koa-bodyparser');//处理post请求
-const app = new Koa();//实例化
+const { connect,initSchemas } = require("./mongodb");
+const mongoose = require('mongoose');
 
 
+//连接数据库
+;(async ()=>{
+  await connect()
+  initSchemas()
+  const User = mongoose.model('User')
+  let oneUser = new User({userName:'lijun1',password:'123456'})
+  oneUser.save().then(()=>{
+      console.log("插入成功")
+  })
+  //查询数据
+  let user = await User.findOne({}).exec();
+  console.log('获取到数据，欧耶',user)
+})()
+// connect()
 
 // koa中间件
 app.use(async (ctx, next) => { //匹配任何路由,如果不写next，那么匹配成功后不会再执行，也就是说如果不执行next，那么只会打印时间，但对应的内容不会展示
@@ -40,3 +56,7 @@ app.use(bodyParser()); //由于middleware的顺序很重要，这个koa-bodypars
 app.use(router.routes()); //作用：启动路由
 //app.use(router.allowedMethods()); 
 // 作用： 上面这是官方文档的推荐用法,我们可以看到 router.allowedMethods() 用在了路由匹配 router.routes() 之后, 所以在当所有路由中间件最后调用.此时根据 ctx.status 设置 response 响应头
+
+app.listen(8080,()=>{
+  console.log('监听8080端口')
+});
