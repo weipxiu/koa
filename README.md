@@ -15,11 +15,13 @@
 
 ## Project setup
 ```
-$npm install (安装依赖)
+$npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-$npm start (运行项目)
+$cd servise
+
+$npm npm dev
 ```
 
