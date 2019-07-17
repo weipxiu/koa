@@ -13,20 +13,33 @@ const { connect, initSchemas } = require("./mongodb");
 })()
 // connect()
 
+//匹配所有路由
+app.use(async (ctx, next) => {
+    console.log('匹配所有路由')
+    await next();
+    if (ctx.status == 404) {
+        ctx.body = {
+            status: 404,
+            msg: '当前没有匹配到任何路由，返回404',
+            request:ctx.request
+        }
+    } else {
+        console.log(ctx.url)
+    }
+})
 
 app.use(cors()); //跨域
-app.use(bodyParser()); //由于middleware的顺序很重要，这个koa-bodyparser必须在router之前被注册到app对象上
+app.use(bodyParser()); //这个koa-bodyparser必须在router之前被注册到app对象上
 
 //引入路由
 let home = require('./Api/home.js');
 // 挂载路由
 let router = new Router()
 //router.use('/home',home.routes()); //注意routes
-router.use('',home.routes()); //注意routes
-
+router.use('', home.routes()); //注意routes
 
 app.use(router.routes()); //启动路由
-app.use(router.allowedMethods()); //根据ctx.status设置response响应头
+app.use(router.allowedMethods()); //可根据ctx.status设置response响应头
 
 app.listen(3000, () => {
     console.log('监听8080端口')

@@ -20,32 +20,47 @@ router.get('/login', async (ctx) => {
   }
 })
 
+router.get('/a/:aaa', function (ctx, next) {
+  // query：拿到的是get请求的对象
+  // querystring：拿到的是get请求的字符串
+  // params：拿到的是get动态路由参数
+  // request：拿到所有地址参数
+  // ctx.request.body 拿到post请求参数对象
 
-// koa中间件
-// app.use(async (ctx, next) => { //匹配任何路由,如果不写next，那么匹配成功后不会再执行，也就是说如果不执行next，那么只会打印时间，但对应的内容不会展示
-//   console.log(new Date())
-//   await next();
-//   if (ctx.status == 404) {
-//     ctx.status = 404;
-//     ctx.body = "这是一个错误的404页面"
-//   } else {
-//     console.log(ctx.url)
-//   }
-// })
-
-router.get('/news/:aaa', function (ctx, next) {
-  //获取动态路由
-  console.log(ctx.query)//拿到的是参数对象 路由：http://localhost:3000/news?s=0
-  //console.log(ctx.querystring)//拿到的是参数字符串 路由：http://localhost:3000/news?s=0
+  //console.log(ctx.query)//拿到的是参数对象 路由：http://localhost:3000/news?s=0
+  //console.log(ctx.querystring)//拿到的是参数字符串 路由：http://localhost:3000/news?s=0 "querystring": "abc=123456789"
   //console.log(ctx.params) //路由：http://localhost:3000/news/123,params必须是用于动态路由
   //console.log(ctx.request)//可以拿到所有地址参数
   ctx.body = {
-    mongodb: 1
+    code: 200,
+    query: ctx.query,
+    querystring: ctx.querystring,
+    params: ctx.params,
+    request: ctx.request
   }
 });
 
+router.get('/b', function (ctx, next) {
+
+  ctx.body = {
+    code: 200,
+    query: ctx.query,
+    querystring: ctx.querystring,
+    params: ctx.params,
+    request: ctx.request
+  }
+});
+
+
 router.post('/signin', function (ctx, next) {
-  ctx.body = "我是post请求"
+  ctx.body = {
+    code: 200,
+    query: ctx.query,
+    querystring: ctx.querystring,
+    params: ctx.params,
+    request: ctx.request,
+    postParam: ctx.request.body //post请求参数获取
+  }
 });
 
 module.exports = router
