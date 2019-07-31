@@ -12,7 +12,8 @@
 2. [Koa2](http://es6.ruanyifeng.com) Koa -- 基于 Node.js 平台的下一代 web 开发框架(替代Express)
 3. [MongoDB](https://www.mongodb.com/) Node.js最佳伴侣
 
-
+<!-- mongod --dbpath=E:\personal\koa\service\db --port=27017 -->
+<!-- /www/server/mongodb/data -->
 ## Project setup
 ```
 $npm install
@@ -21,6 +22,8 @@ $npm install
 ### Compiles and hot-reloads for development
 ```
 $cd servise
+
+$npm install
 
 $npm npm dev
 ```
