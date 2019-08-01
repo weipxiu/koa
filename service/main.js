@@ -42,5 +42,5 @@ app.use(router.routes()); //启动路由
 app.use(router.allowedMethods()); //可根据ctx.status设置response响应头
 
 app.listen(3000, () => {
-    console.log('监听8080端口')
+    console.log('监听3000端口')
 });
