@@ -7,10 +7,10 @@ const { connect, initSchemas } = require("./mongodb");
 
 
 //连接数据库
-(async () => {
-    await connect() //连接mongodb数据库
-    initSchemas() //数据库模型schema
-})()
+// (async () => {
+//     await connect() //连接mongodb数据库
+//     initSchemas() //数据库模型schema
+// })()
 // connect()
 
 //匹配所有路由

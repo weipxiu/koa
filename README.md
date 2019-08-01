@@ -13,7 +13,19 @@
 3. [MongoDB](https://www.mongodb.com/) Node.js最佳伴侣
 
 <!-- mongod --dbpath=E:\personal\koa\service\db --port=27017 -->
-<!-- /www/server/mongodb/data -->
+<!-- mongod --dbpath=/www/wwwroot/koa/service/db --port=27017 -->
+<!-- /www/wwwroot/koa/service -->
+<!-- echo "/www/wwwroot/koa/service/mongodb --dbpath=/www/wwwroot/koa/service/mongodb/db –logpath=/www/wwwroot/koa/service/mongodb/logs –logappend  --auth -–port=27017" >> /etc/rc.local
+
+/www/wwwroot/koa/service/mongodb/bin/mongod --/www/wwwroot/koa/service/mongodb/db --logpath=/www/wwwroot/koa/service/mongodb/logs --logappend  --port=27017 --fork
+
+dbpath=/www/wwwroot/koa/service/mongodb/db
+logpath=/www/wwwroot/koa/service/mongodb/logs
+port=27017
+fork=true -->
+
+<!-- ./mongod -f mongodb.conf -->
+
 ## Project setup
 ```
 $npm install
