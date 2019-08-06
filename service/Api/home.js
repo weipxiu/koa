@@ -9,16 +9,65 @@ router.get('/', function (ctx, next) {
   }
 });
 
-router.get('/login', async (ctx) => {
-  try {
-    const User = mongoose.model('User')
-    let result = await User.findById('5d2da91b76accfce15fdfbfe').exec();
-    //console.log(option)
-    ctx.body = { code: 200, data: result }
-  } catch (error) {
-    ctx.body = { code: 500, message: error }
-  }
+router.post('/register',async(ctx)=>{
+   
+  const User = mongoose.model('User')
+  let newUser = new User(ctx.request.body)
+
+  await newUser.save().then(()=>{
+      ctx.body={
+          code:200,
+          message:'注册成功'
+      }
+  }).catch(error=>{
+      ctx.body={
+          code:500,
+          message:error
+      }
+  })
 })
+
+router.post('/login',async(ctx)=>{
+  let loginUser = ctx.request.body
+  console.log(loginUser)
+  let userName = loginUser.userName
+  let password = loginUser.password
+
+  //引入User的model
+  const User = mongoose.model('User')
+
+  await User.findOne({userName:userName}).exec().then(async(result)=>{
+      console.log(result)
+      if(result){
+          let newUser = new User()
+          await newUser.comparePassword(password,result.password)
+          .then(isMatch=>{
+              ctx.body={code:200,message:isMatch}
+          })
+          .catch(error=>{
+              console.log(error)
+              ctx.body={code:500,message:error}
+          })
+      }else{
+          ctx.body={code:200,message:'用户名不存在'}
+      }
+  }).catch(error=>{
+      console.log(error)
+      ctx.body={code:500,message:error}
+  })
+
+})
+
+// router.get('/login', async (ctx) => {
+//   try {
+//     const User = mongoose.model('User')
+//     let result = await User.findById('5d2da91b76accfce15fdfbfe').exec();
+//     //console.log(option)
+//     ctx.body = { code: 200, data: result }
+//   } catch (error) {
+//     ctx.body = { code: 500, message: error }
+//   }
+// })
 
 router.get('/a/:aaa', function (ctx, next) {
   // query：拿到的是get请求的对象
@@ -64,20 +113,6 @@ router.post('/signin', function (ctx, next) {
 });
 
 module.exports = router
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //插入数据
 // let oneUser = new User({ userName: 'lijun5', password: '123456' })

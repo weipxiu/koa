@@ -15,7 +15,7 @@ const { connect, initSchemas } = require("./mongodb");
 
 //匹配所有路由
 app.use(async (ctx, next) => {
-    console.log('匹配所有路由')
+    //aaconsole.log('匹配所有路由')
     await next();
     if (ctx.status == 404) {
         ctx.body = {
@@ -24,7 +24,7 @@ app.use(async (ctx, next) => {
             request:ctx.request
         }
     } else {
-        console.log(ctx.url)
+        //console.log(ctx.request)
     }
 })
 
