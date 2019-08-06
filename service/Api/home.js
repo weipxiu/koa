@@ -65,21 +65,8 @@ router.post('/signin', function (ctx, next) {
 
 module.exports = router
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //插入数据
+// const User = mongoose.model('User')
 // let oneUser = new User({ userName: 'lijun5', password: '123456' })
 // oneUser.save().then(() => {
 //     console.log("插入成功")
