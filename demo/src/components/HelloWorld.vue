@@ -2,10 +2,20 @@
   <div class="content">
     <!-- <h1>{{ msg }}</h1> -->
     <h1>多人实时在线聊天</h1>
+    <p>当前在线人数：{{userNmber}}</p>
     <input type="请输入内容" v-model="inValue" @keyup.enter="btn_sbmit">
     <input type="button" value="发送" @click="btn_sbmit">
     <ul>
-      <li v-for="(item,index) in speak" :key="index" :class="{active:item.name == userStorage}"><span>{{item.name}}：</span>{{item.msg}}</li>
+      <!-- 最新加入 -->
+      <li v-if="newUser">有新人加入</li>
+      <li v-for="(item,index) in speak" :key="index" :class="{active:item.name == userStorage}">
+        <span>
+          <font v-if="item.name == userStorage">：</font>
+          {{item.name}}
+          <font v-if="item.name != userStorage">：</font>
+        </span>
+        {{item.msg}}
+      </li>
     </ul>
   </div>
 </template>
@@ -17,10 +27,12 @@ export default {
   },
   data() {
     return {
-      speak:[],
-      inValue:'',
+      speak:[], //聊天记录
+      inValue:'', //当前输入信息
       userIp:'未知用户',
-      userStorage: localStorage.getItem("userId")
+      userStorage: localStorage.getItem("userId"),
+      newUser:false, //是否有新人加入
+      userNmber: 0 //在线人数
     }
   },
   created () {
@@ -68,26 +80,25 @@ export default {
   sockets:{
     connect(data){
       if(data){
-        //console.log('连接上connect',data)
-        // this.userIp = wsocket._socket.remoteAddress;
-        // getSocketServiceList().then(res=>{
-        //   if(res.code){
-        //     this.$socket.emit("a",{authCode:res.code})
-        //   }
-        // })
-        // this.$socket.emit("send",{getMsg:"逗比逗比"})
-        // this.speak.push({'name':'我',msg:"逗比逗比"})
+        console.log('连接成功',data)
+        this.$socket.emit("users")
       }
     },
     users(data){
       console.log("在线人数",data)
+      this.userNmber = data;
     },
     reconnect(data){
       console.log('重新连接',data)
     },
-    disconnnect(){
-      console.log('socket已断开连接')
+    disconnecting(data){
+      console.log('socket已断开连接');
+      this.$socket.emit("users")
     },
+    //有新人加入
+    // userinfoNumber(data){
+    //   this.userNmber = true;
+    // },
     getMsg(data){
       console.log("后端传过来的消息",data)
       this.speak = data
@@ -104,6 +115,7 @@ export default {
   border:1px solid #eee;
   margin:50px auto;
   padding:25px;
+  overflow-y: auto;
 }
 h3 {
   margin: 40px 0 0;
@@ -125,7 +137,9 @@ li {
   &.active{
     text-align: right;
     span{
-      color: #42b983
+      color: #42b983;
+      float: right;
+      text-align: right;
     }
   }
 }
