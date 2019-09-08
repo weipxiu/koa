@@ -99,7 +99,7 @@ io.on('connection', socket => {
     //disconnnect断开,自带函数方法
     socket.on('disconnect',data=>{
         console.log('用户断开了');
-        sum = sum - 1;
+        if(sum > 0)sum = sum - 1;
         io.emit('users',sum); //将消息发送给所有人。
     })
     socket.on('send', data => {
