@@ -53,12 +53,12 @@ app.use(
 app.use(bodyParser()); //这个koa-bodyparser必须在router之前被注册到app对象上
 
 //引入路由
-let home = require('./Api/home.js');
-let details = require('./Api/details.js');
+let home = require('./routes/home.js');
+let details = require('./routes/home_details.js');
 
 // 挂载路由
 let router = new Router()
-router.use('/home', home.routes()); //第一个参数/home就是路由前缀，相当于说访问home模块路由必须以/api去访问，模块化管理，可以设置为空
+router.use('/home', home.routes()); //第一个参数/home就是路由前缀，相当于说访问home模块路由必须以/home去访问，模块化管理，可以设置为空
 router.use('/details', details.routes());
 
 app.use(router.routes()); //启动路由
