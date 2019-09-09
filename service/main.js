@@ -6,7 +6,9 @@ const cors = require('koa2-cors');// CORS是一个W3C标准，全称是"跨域�
 const { connect, initSchemas } = require("./mongodb");
 const mongoose = require('mongoose');
 
-const server = require('http').Server(app);
+// const server = require('http').Server(app); //这么写mac电脑会有问题，无法访问
+const server = require('http').Server(app.callback());
+
 const io = require('socket.io')(server);
 const port = 3000;
 
@@ -97,7 +99,7 @@ io.on('connection', socket => {
     //disconnnect断开,自带函数方法
     socket.on('disconnect',data=>{
         console.log('用户断开了');
-        sum = sum - 1;
+        if(sum > 0)sum = sum - 1;
         io.emit('users',sum); //将消息发送给所有人。
     })
     socket.on('send', data => {
@@ -119,6 +121,6 @@ io.on('connection', socket => {
     })
 })
 
-server.listen(process.env.PORT || port, () => {
+server.listen(port, () => {
     console.log(`监听地址: http://127.0.0.1:${port}`);
 })

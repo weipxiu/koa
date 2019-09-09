@@ -26,6 +26,8 @@ fork=true -->
 
 <!-- ./mongod -f mongodb.conf -->
 
+<!-- mac电脑链接：sudo ./mongod --dbpath=/Users/lijun/Documents/mongodb-osx-x86_64-3.6.13/db --port=27017 -->
+
 ## Project setup
 ```
 $npm install
