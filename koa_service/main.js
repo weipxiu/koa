@@ -84,7 +84,7 @@ app.use(router.allowedMethods()); //可根据ctx.status设置response响应头
 //     }
 //   }
 
-let sum = 0;
+let user_count = 0;
 io.on('connection', socket => {
     console.log('初始化成功！');
     const Message = mongoose.model('Message')
@@ -93,14 +93,14 @@ io.on('connection', socket => {
     })
     //新人进来在线人数+1
     socket.on('users',data=>{
-        sum = sum + 1;
-        io.emit('users',sum); //将消息发送给所有人。
+        user_count = user_count + 1;
+        io.emit('users',user_count); //将消息发送给所有人。
     })
     //disconnnect断开,自带函数方法
     socket.on('disconnect',data=>{
         console.log('用户断开了');
-        if(sum > 0)sum = sum - 1;
-        io.emit('users',sum); //将消息发送给所有人。
+        if(user_count > 0)user_count = user_count - 1;
+        io.emit('users',user_count); //将消息发送给所有人。
     })
     socket.on('send', data => {
         // console.log('客户端发送的内容：',data, data['name'], data['getMsg']);

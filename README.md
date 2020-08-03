@@ -12,7 +12,7 @@
 2. [Koa2](http://es6.ruanyifeng.com) Koa -- 基于 Node.js 平台的下一代 web 开发框架(替代Express)
 3. [MongoDB](https://www.mongodb.com/) Node.js最佳伴侣
 
-<!-- mongod --dbpath=E:\personal\koa\service\db --port=27017 -->
+<!-- mongod --dbpath=E:\personal\koa\koa_service\db --port=27017 -->
 <!-- mongod --dbpath=/www/wwwroot/koa/service/db --port=27017 -->
 <!-- /www/wwwroot/koa/service -->
 <!-- echo "/www/wwwroot/koa/service/mongodb --dbpath=/www/wwwroot/koa/service/mongodb/db –logpath=/www/wwwroot/koa/service/mongodb/logs –logappend  --auth -–port=27017" >> /etc/rc.local
@@ -39,7 +39,7 @@ $cd servise
 
 $npm install
 
-$npm npm dev
+$npm npm run dev
 ```
 
 

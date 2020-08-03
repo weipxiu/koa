@@ -1,0 +1,17 @@
+# https://editorconfig.org
+root = true
+
+# 格式规范，请直接复制使用，勿修改。
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+max_line_length = 100
+tab_width = 2
+trim_trailing_whitespace = true
+
+[*.md]
+insert_final_newline = false
+trim_trailing_whitespace = false

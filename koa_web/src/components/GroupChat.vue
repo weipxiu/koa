@@ -1,25 +1,7 @@
 <template>
   <div class="content">
-    <!-- <h1>{{ msg }}</h1> -->
     <h1>多人实时在线聊天</h1>
     <p class="user_number">当前在线人数：<span>{{userNmber}}</span></p>
-    <el-row>
-      <el-col :span="20">
-        <div class="grid-content bg-purple">
-          <el-input v-model="inValue" size="small" placeholder="请输入内容" @keyup.enter.native="btn_sbmit"></el-input>
-        </div>
-      </el-col>
-
-      <el-col :span="4">
-        <div class="grid-content bg-purple-light">
-          <el-button type="primary" size="small" @click="btn_sbmit">发送</el-button>
-        </div>
-      </el-col>
-
-      <!-- <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col> -->
-    </el-row>
-
-
     <ul>
       <!-- 最新加入 -->
       <li v-if="newUser">有新人加入</li>
@@ -32,14 +14,26 @@
         {{item.msg}}
       </li>
     </ul>
+
+    <el-row>
+      <el-col :span="20">
+        <div class="grid-content bg-purple">
+          <el-input v-model="inValue" size="small" placeholder="请输入内容" @keyup.enter.native="btn_sbmit"></el-input>
+        </div>
+      </el-col>
+      <el-col :span="4">
+        <div class="grid-content bg-purple-light">
+          <el-button type="primary" size="small" @click="btn_sbmit">发送</el-button>
+        </div>
+      </el-col>
+      <!-- <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col> -->
+    </el-row>
+
   </div>
 </template>
 <script>
   export default {
-    name: 'HelloWorld',
-    props: {
-      msg: String
-    },
+    name: 'GroupChat',
     data() {
       return {
         speak: [], //聊天记录
@@ -122,15 +116,14 @@
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+
   .content {
     width: 500px;
     height: 500px;
-    margin: 0px auto;
-    padding: 25px;
-    overflow-y: auto;
-
+    margin: 100px auto 0;
+    border:1px solid #eee;
+    border-radius: 8px;
     .user_number {
       font-size: 20px;
 
@@ -140,6 +133,14 @@
     }
   }
 
+  h1{
+font-size:20px;
+margin:0;
+line-height: 36px;
+font-weight: normal;
+border-bottom: 1px solid #eee;
+  }
+
   h3 {
     margin: 40px 0 0;
   }
@@ -147,7 +148,21 @@
   ul {
     list-style-type: none;
     padding: 0;
+    height:300px;
+    overflow-y: auto;
   }
+  ul::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+    background-color: #f1f1ef;
+}
+ul::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #ccc;
+}
+ul::-webkit-scrollbar-track {
+    background-color: #f1f1ef;
+}
 
   li {
     margin: 10px;

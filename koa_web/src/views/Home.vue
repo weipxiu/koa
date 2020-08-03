@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <HelloWorld msg="HelloWorld组件"/>
+    <GroupChat/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import GroupChat from '@/components/GroupChat.vue'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    GroupChat
   }
 }
 </script>
