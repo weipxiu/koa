@@ -33,7 +33,7 @@
 </template>
 <script>
   export default {
-    name: 'GroupChat',
+    name: 'groupChat',
     data() {
       return {
         speak: [], //聊天记录

@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <GroupChat/>
+    <group-chat />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import GroupChat from '@/components/GroupChat.vue'
+import groupChat from '@/components/group-chat.vue'
 
 export default {
   name: 'home',
   components: {
-    GroupChat
+    groupChat
   }
 }
 </script>
