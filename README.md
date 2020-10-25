@@ -37,7 +37,9 @@ $npm install
 
 ### Compiles and hot-reloads for development
 ```
-$cd servise
+$cd koa_web（前台）
+
+$cd koa_service（后台）
 
 $npm install
 
