@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 let router = new Router()
 
 router.get('/', function (ctx, next) {
+  console.log(ctx.status)
   ctx.body = {
     mongodb: '这是详情页面'
   }

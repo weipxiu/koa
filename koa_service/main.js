@@ -30,7 +30,7 @@ app.use(async (ctx, next) => {
             request: ctx.request
         }
     } else {
-        //console.log(ctx.request)
+        // console.log(ctx.request)
     }
 })
 
@@ -38,12 +38,12 @@ app.use(async (ctx, next) => {
 app.use(
     cors({
         origin: function (ctx) { //设置允许来自指定域名请求
-            const whiteList = ['http://weipxiu.com', 'http://localhost:8081'];
+            const whiteList = ['http://weipxiu.com', 'http://localhost:3000'];
             let url = ctx.header.referer && ctx.header.referer.substr(0, ctx.header.referer.length - 1)
             if (whiteList.includes(url)) {
                 return url
             }
-            return 'http://localhost:3000'
+            return 'http://localhost:8081'
         },
         maxAge: 5, //指定本次预检请求的有效期，单位为秒。
         credentials: true, //是否允许发送Cookie

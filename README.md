@@ -10,11 +10,15 @@
 
 1. [Node](https://nodejs.org/zh-cn/) Koa 依赖 node v7.6.0 或 ES2015及更高版本和 async 方法支持
 2. [Koa2](http://es6.ruanyifeng.com) Koa -- 基于 Node.js 平台的下一代 web 开发框架(替代Express)
-3. [MongoDB](https://www.mongodb.com/) Node.js最佳伴侣
+3. [MongoDB](https://www.mongodb.com/) 基于分布式文件存储的数据库
 
-<!-- mongod --dbpath=E:\personal\koa\koa_service\db --port=27017 -->
+## 数据库连接方式
+
+1. 下载mongodb，版本v3.6.13，其他版本自测，解压后在bin同目录下新建db文件夹
+2. win连接(配置了环境变量)：mongod --dbpath=E:\personal\koa\koa_service\db --port=27017
+3. mac连接(未配置环境变量)：sudo ./mongod --dbpath=/Users/lijun/Documents/mongodb-osx-x86_64-3.6.13/db --port=27017
+
 <!-- mongod --dbpath=/www/wwwroot/koa/service/db --port=27017 -->
-<!-- /www/wwwroot/koa/service -->
 <!-- echo "/www/wwwroot/koa/service/mongodb --dbpath=/www/wwwroot/koa/service/mongodb/db –logpath=/www/wwwroot/koa/service/mongodb/logs –logappend  --auth -–port=27017" >> /etc/rc.local
 
 /www/wwwroot/koa/service/mongodb/bin/mongod --/www/wwwroot/koa/service/mongodb/db --logpath=/www/wwwroot/koa/service/mongodb/logs --logappend  --port=27017 --fork
@@ -25,8 +29,6 @@ port=27017
 fork=true -->
 
 <!-- ./mongod -f mongodb.conf -->
-
-<!-- mac电脑链接：sudo ./mongod --dbpath=/Users/lijun/Documents/mongodb-osx-x86_64-3.6.13/db --port=27017 -->
 
 ## Project setup
 ```
