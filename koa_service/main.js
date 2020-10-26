@@ -21,7 +21,7 @@ const port = 3000;
 
 //匹配所有路由
 app.use(async (ctx, next) => {
-    //aaconsole.log('匹配所有路由')
+    console.log('匹配所有路由',ctx.status)
     await next();
     if (ctx.status == 404) {
         ctx.body = {
@@ -29,29 +29,27 @@ app.use(async (ctx, next) => {
             msg: '当前没有匹配到任何路由，返回404',
             request: ctx.request
         }
-    } else {
-        // console.log(ctx.request)
     }
 })
 
-//app.use(cors()); //全部允许跨域
-app.use(
-    cors({
-        origin: function (ctx) { //设置允许来自指定域名请求
-            const whiteList = ['http://weipxiu.com', 'http://localhost:3000'];
-            let url = ctx.header.referer && ctx.header.referer.substr(0, ctx.header.referer.length - 1)
-            if (whiteList.includes(url)) {
-                return url
-            }
-            return 'http://localhost:8081'
-        },
-        maxAge: 5, //指定本次预检请求的有效期，单位为秒。
-        credentials: true, //是否允许发送Cookie
-        allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], //设置所允许的HTTP请求方法
-        allowHeaders: ['Content-Type', 'Authorization', 'Accept'], //设置服务器支持的所有头信息字段
-        exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'] //设置获取其他自定义字段
-    })
-);
+app.use(cors()); //全部允许跨域
+// app.use(
+//     cors({
+//         origin: function (ctx) { //设置允许来自指定域名请求
+//             const whiteList = ['http://weipxiu.com', 'http://localhost:3000'];
+//             let url = ctx.header.referer && ctx.header.referer.substr(0, ctx.header.referer.length - 1)
+//             if (whiteList.includes(url)) {
+//                 return url
+//             }
+//             return 'http://localhost:8081'
+//         },
+//         maxAge: 5, //指定本次预检请求的有效期，单位为秒。
+//         credentials: true, //是否允许发送Cookie
+//         allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], //设置所允许的HTTP请求方法
+//         allowHeaders: ['Content-Type', 'Authorization', 'Accept'], //设置服务器支持的所有头信息字段
+//         exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'] //设置获取其他自定义字段
+//     })
+// );
 app.use(bodyParser()); //这个koa-bodyparser必须在router之前被注册到app对象上
 
 //引入路由
