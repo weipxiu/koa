@@ -5,7 +5,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import groupChat from '@/components/group-chat.vue'
 
 export default {

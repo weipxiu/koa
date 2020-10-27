@@ -2,7 +2,7 @@
   <div class="content">
     <h1>多人实时在线聊天</h1>
     <p class="user_number">当前在线人数：<span>{{userNmber}}</span></p>
-    <ul>
+    <ul id="container">
       <!-- 最新加入 -->
       <li v-if="newUser">有新人加入</li>
       <li v-for="(item,index) in speak" :key="index" :class="{active:item.name == userStorage}">
@@ -110,7 +110,15 @@
       // },
       getMsg(data) {
         console.log("后端传过来的消息", data)
-        this.speak = data
+        this.speak = data;
+        var ele = document.getElementById("container");
+        setTimeout(()=>{
+          //判断元素是否出现了滚动条
+          if(ele.scrollHeight > ele.clientHeight) {
+            //设置滚动条到最底部
+            ele.scrollTop = ele.scrollHeight;
+          }
+        },100)
       }
     }
   }

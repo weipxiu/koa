@@ -114,7 +114,9 @@ router.get('/getColor', async function (ctx, next) {
     await Color.find({}, function (err, res) {
       ctx.body = {
         code: 200,
-        data: res
+        data: {
+          value:res[0].colorValue
+        }
       }
     }).sort({_id:-1}).limit(1); // sort根据_id字段进行倒叙返回，默认1
   } catch (error) {
