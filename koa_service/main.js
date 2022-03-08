@@ -104,16 +104,21 @@ io.on('connection', socket => {
     socket.on('send', data => {
         // console.log('客户端发送的内容：',data, data['name'], data['getMsg']);
         try {
-            const Message = mongoose.model('Message')
-            let oneUser = new Message({ name: data['name'], msg: data['getMsg'] })
-            oneUser.save().then(() => {
+            if(data['type']=='private'){
+                socket.broadcast.to(data['name']).emit('getMsg',data['getMsg']); // 局部广播
+            }else{
                 const Message = mongoose.model('Message')
-                Message.find({}, function (err, res) {
-                    console.log('获取到数据', data)
-                    io.emit('getMsg', res); // 全局广播
-                    // socket.broadcast.to(data['name']).emit('getMsg',res); // 局部广播
+                let oneUser = new Message({ name: data['name'], msg: data['getMsg'] })
+                oneUser.save().then(() => {
+                    const Message = mongoose.model('Message')
+                    Message.find({}, function (err, res) {
+                        console.log('获取到数据', data)
+                        io.emit('getMsg', res); // 全局广播
+
+                    })
                 })
-            })
+            }
+            
         } catch (error) {
             console.log("失败",error)
         }
