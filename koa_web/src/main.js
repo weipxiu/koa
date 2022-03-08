@@ -12,7 +12,7 @@ Vue.use(ElementUI);
 
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://127.0.0.1:3000',  
+  connection: 'http://127.0.0.1:3000'
 }))
 
 Vue.config.productionTip = false

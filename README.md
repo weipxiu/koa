@@ -1,4 +1,4 @@
-# Koa2+Nodejs+MongoDb 前后端全栈项目实战
+# Nodejs+Koa2+Vue2.x+MongoDb 前后端全栈项目实战
 
 ## Koa
 
@@ -30,16 +30,11 @@ fork=true -->
 
 <!-- ./mongod -f mongodb.conf -->
 
-## Project setup
+### 如何启动？
 ```
-$npm install
-```
+$cd koa_web
 
-### Compiles and hot-reloads for development
-```
-$cd koa_web（前台）
-
-$cd koa_service（后台）
+$cd koa_service
 
 $npm install
 

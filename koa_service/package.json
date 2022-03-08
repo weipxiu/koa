@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "mongod --dbpath=E:/personal/koa/koa_service/db --port=27017",
     "dev": "node main.js"
   },
   "keywords": [],

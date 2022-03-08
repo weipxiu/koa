@@ -8,7 +8,7 @@
 import groupChat from '@/components/group-chat.vue'
 
 export default {
-  name: 'home',
+  name: 'Home',
   components: {
     groupChat
   }
