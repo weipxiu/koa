@@ -1,7 +1,6 @@
 <template>
   <div class="content">
-    <h1>多人实时在线聊天</h1>
-    <p class="user_number">当前在线人数：<span>{{ userNmber }}</span></p>
+    <h1>实时在线聊天 - 私聊</h1>
     <ul id="container">
       <!-- 最新加入 -->
       <li v-for="(item,index) in speak" :key="index" :class="{active:item.name == userStorage}">
@@ -61,12 +60,12 @@ export default {
       if (!localStorage.getItem('userId')) {
         this.userIp = (this.formatDateTime() + Math.random().toString(36)).substr(-5, 5);
         this.speak.push({ 'name': this.userIp, msg: this.inValue })
-        this.$socket.emit('send', { name: '用户' + this.userIp, getMsg: this.inValue })
+        this.$socket.emit('send', { type: 'private', name: '用户' + this.userIp, getMsg: this.inValue })
         localStorage.setItem('userId', '用户' + this.userIp);
         this.userStorage = localStorage.getItem('userId');
       } else {
         this.speak.push({ 'name': localStorage.getItem('userId'), msg: this.inValue })
-        this.$socket.emit('send', { name: localStorage.getItem('userId'), getMsg: this.inValue })
+        this.$socket.emit('send', { type: 'private', name: localStorage.getItem('userId'), getMsg: this.inValue })
       }
       this.inValue = ''
     },
@@ -126,13 +125,6 @@ export default {
     margin: 20px auto;
     border:1px solid #eee;
     border-radius: 8px;
-    .user_number {
-      font-size: 20px;
-
-      span {
-        color: #ed5bb5
-      }
-    }
   }
 
   h1{
