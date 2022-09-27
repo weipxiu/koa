@@ -33,6 +33,11 @@ module.exports = router
 // })
 
 //查询数据
+// 参数查询规则
+// find({$or:[{from_user:data.from_user}, {to_user:data.to_user}])) // 前后满足一个即可
+// find({from_user: { $in: [from_user, to_user] }}) 查询某个字段可能有多个候选值
+// find({ price: { $ne: 1.99, $exists: true } }) 条件是price不等于1.99并且price字段存在
+
 //find和findOne
 // 如果用findOne({ name: ”张三” })查询，返回的只会是第一个张三
 // 如果用find({ name: ”张三” })查询的话，就会返回两个张三了
@@ -46,10 +51,12 @@ module.exports = router
 //   });
 
 //findByIdAndUpdate更新数据
-// await User.findByIdAndUpdate('5d2da91b76accfce15fdfbfe', {userName:'奥妙全自动'}, function(err, res) {
+// await User.findByIdAndUpdate('5d2da91b76accfce15fdfbfe', {userName:'奥利给'}, function(err, res) {
 //     if (err) {
 //       console.log(err);
 //     } else {
 //       console.log(res);
 //     }
 //   });
+
+//查多个表方法:$lookup,aggregate
